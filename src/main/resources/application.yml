@@ -1,0 +1,10 @@
+spring:
+  main:
+    log-startup-info: false # 起動時ログの出力停止
+    banner-mode: off # 起動時のバナー表示の停止
+aws:
+  db:
+    db-name: ${DB_NAME}
+    host: ${DB_HOST}
+    user-name: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
