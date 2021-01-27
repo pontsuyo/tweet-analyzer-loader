@@ -43,6 +43,7 @@ ext {
     springCloudFunctionVersion = "3.0.0.BUILD-SNAPSHOT"
     awsLambdaEventsVersion = "2.0.2"
     awsLambdaCoreVersion = "1.1.0"
+    twitter4jVersion = "4.0.7"
 }
 ext['reactor.version'] = "3.1.7.RELEASE"
 
@@ -54,7 +55,8 @@ jar {
     }
 }
 
-import com.github.jengelman.gradle.plugins.shadow.transformers.*
+
+import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
 
 shadowJar {
     classifier = 'aws'
@@ -90,4 +92,14 @@ dependencies {
     compileOnly("com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}")
     compileOnly("com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}")
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    // lombok
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+
+    // MySQL
+    compile("mysql:mysql-connector-java:8.0.23")
 }
