@@ -15,3 +15,4 @@ artifacts:
   files:
     - build/libs/tweet-analyzer-loader-2.0.0.RELEASE-aws.jar
   discard-paths: yes
+
