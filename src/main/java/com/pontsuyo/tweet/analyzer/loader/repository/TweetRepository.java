@@ -18,7 +18,7 @@ public class TweetRepository {
         .tableName("tweet-analyzer")
         .item(Map.of(
             "id", AttributeValue.builder().n("100").build(),
-            "text", AttributeValue.builder().n(new Date().toInstant().toString()).build())
+            "text", AttributeValue.builder().s(String.valueOf(new Date().toInstant().getEpochSecond())).build())
         )
         .build();
 
