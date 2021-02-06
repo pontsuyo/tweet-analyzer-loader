@@ -21,16 +21,16 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'org.springframework.boot.experimental.thin-launcher'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'io.spring.sample'
+group = 'com.pontsuyo'
 version = '2.0.0.RELEASE'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_11
+
 
 repositories {
     mavenLocal()
@@ -103,4 +103,8 @@ dependencies {
     implementation platform('software.amazon.awssdk:bom:2.15.0')
     implementation 'software.amazon.awssdk:aws-json-protocol'
     implementation 'software.amazon.awssdk:dynamodb'
+}
+
+test {
+    useJUnitPlatform()
 }
