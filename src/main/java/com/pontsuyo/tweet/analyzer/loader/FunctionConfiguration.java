@@ -1,6 +1,6 @@
 package com.pontsuyo.tweet.analyzer.loader;
 
-import com.pontsuyo.tweet.analyzer.loader.domain.repository.TweetRepository;
+import com.pontsuyo.tweet.analyzer.loader.repository.TweetRepository;
 import java.util.function.Function;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +20,7 @@ public class FunctionConfiguration {
   }
 
   @Bean
-  public Function<Long, String> getTweet() {
-    return id -> tweetRepository.getTweetById(id).getText();
+  public Function<Long, String> updateTweet() {
+    return id -> tweetRepository.updateTweet(id);
   }
 }

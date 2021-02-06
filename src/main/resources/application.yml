@@ -5,8 +5,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-  datasource:
-    password: ${DB_PASS}
-    username: ${DB_USERNAME}
-    url: jdbc:mysql://${DB_URL}/${DB_NAME}
-    driver-class-name: com.mysql.cj.jdbc.Driver
