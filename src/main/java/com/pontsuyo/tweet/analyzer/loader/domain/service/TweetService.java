@@ -35,7 +35,6 @@ public class TweetService {
 
     } catch (TwitterException te) {
       log.error("Tweet取得失敗", te);
-      System.exit(-1);
     }
 
     // todo 返り値の型を検討
