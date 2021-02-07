@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.2.0.BUILD-SNAPSHOT'
+        springBootVersion = '2.4.0'
         wrapperVersion = '1.0.17.RELEASE'
         shadowVersion = '5.1.0'
     }
@@ -88,9 +88,10 @@ dependencyManagement {
 dependencies {
     compile("org.springframework.cloud:spring-cloud-function-adapter-aws")
     compile("org.springframework.cloud:spring-cloud-starter-function-webflux")
-    compile("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}")
     compileOnly("com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}")
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -103,6 +104,9 @@ dependencies {
     implementation platform('software.amazon.awssdk:bom:2.15.0')
     implementation 'software.amazon.awssdk:aws-json-protocol'
     implementation 'software.amazon.awssdk:dynamodb'
+
+    // Twitter4J https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core
+    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
 }
 
 test {
