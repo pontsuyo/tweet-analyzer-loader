@@ -1,5 +1,7 @@
 package com.pontsuyo.tweet.analyzer.loader.domain.service;
 
+import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
+import com.pontsuyo.tweet.analyzer.loader.repository.TweetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import twitter4j.Query;
@@ -15,9 +17,11 @@ public class TweetService {
   private static final String TWEET_SEARCH_QUERY = "";
 
   private final Twitter twitter;
+  private final TweetRepository tweetRepository;
 
-  public TweetService(Twitter twitter) {
+  public TweetService(Twitter twitter, TweetRepository tweetRepository) {
     this.twitter = twitter;
+    this.tweetRepository = tweetRepository;
   }
 
   public String updateTweets() {
@@ -28,8 +32,9 @@ public class TweetService {
     try {
       do {
         result = twitter.search(query);
-        var tweets = result.getTweets();
-        // todo respositoryに渡してDynamoDBに書き込み
+        result.getTweets().stream()
+            .map(Tweet::fromStatus)
+            .forEach(tweetRepository::updateTweet);
 
       } while ((query = result.nextQuery()) != null);
 
