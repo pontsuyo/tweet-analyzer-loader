@@ -3,23 +3,35 @@ package com.pontsuyo.tweet.analyzer.loader.domain.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
+import lombok.Builder;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import twitter4j.Status;
 
-@Data
+@Builder
 public class Tweet {
 
-  private Long tweetId;
+  private final Long tweetId;
 
-  private Long userId;
+  private final Long userId;
 
-  private String text = "";
+  private final String text;
 
-  private List<String> imageUrls = Collections.emptyList();
+  private final List<String> imageUrls;
 
-  private Integer favoriteCount;
+  private final Integer favoriteCount;
 
-  private Integer retweetCount;
+  private final Integer retweetCount;
+
+  public static Tweet fromStatus(Status status) {
+    return Tweet.builder()
+        .tweetId(status.getId())
+        .userId(status.getUser().getId())
+        .text(status.getText())
+        .imageUrls(Collections.emptyList()) // todo 仮置き
+        .favoriteCount(status.getFavoriteCount())
+        .retweetCount(status.getFavoriteCount())
+        .build();
+  }
 
   public Map<String, AttributeValue> toQueryMap() {
     return Map.of(
