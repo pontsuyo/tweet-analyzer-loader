@@ -1,6 +1,5 @@
 package com.pontsuyo.tweet.analyzer.loader.domain.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
@@ -28,9 +27,6 @@ public class Tweet {
 
   private final List<String> imageUrls;
 
-  // note ComponentクラスでAutowiredしたものを使うにはtoQueryMap()ごと移動する必要あり
-  private final ObjectMapper objectMapper = new ObjectMapper();
-
   public static Tweet fromStatus(Status status) {
     return Tweet.builder()
         .tweetId(status.getId())
@@ -50,9 +46,6 @@ public class Tweet {
 
   /**
    * DynamoDBのRepositoryに渡すクエリに変換する
-   * <p>
-   * AttributeValue.ss()はset（要素順序を保証しない）でしか書き込めないので
-   * image_urlsの書き込み時は、シリアライズしてAttributeValue.s()を使用する。
    *
    * @return DynamoDB用書き込みクエリ
    */
@@ -63,18 +56,13 @@ public class Tweet {
         "user_id", AttributeValue.builder().n(userId.toString()).build(),
         "favorite_count", AttributeValue.builder().n(favoriteCount.toString()).build(),
         "retweet_count", AttributeValue.builder().n(retweetCount.toString()).build(),
-        "image_urls", AttributeValue.builder().s(objectToString(imageUrls)).build()
+        "image_urls", AttributeValue.builder().l(stringList2AttributeValueList(imageUrls)).build()
     );
   }
 
-  private String objectToString(Object obj) {
-    String jsonString;
-    try {
-      jsonString = objectMapper.writeValueAsString(obj);
-    } catch (JsonProcessingException e) {
-      log.warn("object serialization failed.", e);
-      return "";
-    }
-    return jsonString;
+  private List<AttributeValue> stringList2AttributeValueList(List<String> stringList) {
+    return stringList.stream()
+        .map(string -> AttributeValue.builder().s(string).build())
+        .collect(Collectors.toList());
   }
 }
