@@ -34,6 +34,7 @@ public class Tweet {
   }
 
   public Map<String, AttributeValue> toQueryMap() {
+    // todo imageUrlsのsetの仕方を考える
     return Map.of(
         "id", AttributeValue.builder().n(tweetId.toString()).build(),
         "text", AttributeValue.builder().s(text).build(),
