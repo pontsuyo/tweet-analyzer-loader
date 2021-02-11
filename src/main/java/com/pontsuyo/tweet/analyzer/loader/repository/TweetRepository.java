@@ -1,17 +1,19 @@
 package com.pontsuyo.tweet.analyzer.loader.repository;
 
 import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
+@Slf4j
 @Repository
 public class TweetRepository {
 
   /**
    * DynamoDBへの書き込み
    */
-  public String updateTweet(Tweet tweet) {
+  public void updateTweet(Tweet tweet) {
     var request = PutItemRequest.builder()
         .tableName("tweet-analyzer")
         .item(tweet.convert2QueryMap())
@@ -20,8 +22,7 @@ public class TweetRepository {
     var client = DynamoDbClient.create();
     client.putItem(request);
 
-    // TODO クラス間のIF調整
-    return "OK";
+    log.info("DBへの書き込みに成功しました。");
   }
 }
 
