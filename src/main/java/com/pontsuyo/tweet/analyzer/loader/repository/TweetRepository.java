@@ -1,10 +1,8 @@
 package com.pontsuyo.tweet.analyzer.loader.repository;
 
-import java.util.Date;
-import java.util.Map;
+import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
 @Repository
@@ -13,13 +11,10 @@ public class TweetRepository {
   /**
    * DynamoDBへの書き込み
    */
-  public String updateTweet(Long id) {
+  public String updateTweet(Tweet tweet) {
     var request = PutItemRequest.builder()
         .tableName("tweet-analyzer")
-        .item(Map.of(
-            "id", AttributeValue.builder().n("100").build(),
-            "text", AttributeValue.builder().s(String.valueOf(new Date().toInstant().getEpochSecond())).build())
-        )
+        .item(tweet.toQueryMap())
         .build();
 
     var client = DynamoDbClient.create();
