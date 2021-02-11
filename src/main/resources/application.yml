@@ -5,7 +5,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-
+  cloud:
+    function:
+      definition: updateTweet
 # Tweet取得クライアントの設定
 twitter:
   auth:
