@@ -49,7 +49,7 @@ public class Tweet {
    *
    * @return DynamoDB用書き込みクエリ
    */
-  public Map<String, AttributeValue> convertToQueryMap() {
+  public Map<String, AttributeValue> convert2QueryMap() {
     return Map.of(
         "id", AttributeValue.builder().n(tweetId.toString()).build(),
         "text", AttributeValue.builder().s(text).build(),

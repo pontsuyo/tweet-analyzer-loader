@@ -14,7 +14,7 @@ public class TweetRepository {
   public String updateTweet(Tweet tweet) {
     var request = PutItemRequest.builder()
         .tableName("tweet-analyzer")
-        .item(tweet.convertToQueryMap())
+        .item(tweet.convert2QueryMap())
         .build();
 
     var client = DynamoDbClient.create();
