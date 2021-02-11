@@ -33,7 +33,7 @@ public class Tweet {
         .userId(status.getUser().getId())
         .text(status.getText())
         .favoriteCount(status.getFavoriteCount())
-        .retweetCount(status.getFavoriteCount())
+        .retweetCount(status.getRetweetCount())
         .imageUrls(getMediaUrlList(status))
         .build();
   }
