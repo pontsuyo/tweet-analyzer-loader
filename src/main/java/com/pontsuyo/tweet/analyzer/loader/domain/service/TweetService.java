@@ -1,10 +1,11 @@
 package com.pontsuyo.tweet.analyzer.loader.domain.service;
 
 import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
+import com.pontsuyo.tweet.analyzer.loader.domain.model.TweetSearchQuery;
 import com.pontsuyo.tweet.analyzer.loader.repository.TweetRepository;
+import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -13,8 +14,8 @@ import twitter4j.TwitterException;
 @Service
 public class TweetService {
 
-  // todo 検索クエリは仮置き
-  private static final String TWEET_SEARCH_QUERY = "";
+  // note この値は仮置き
+  private static final int MIN_FAVORITES = 10000;
 
   private final Twitter twitter;
   private final TweetRepository tweetRepository;
@@ -26,7 +27,13 @@ public class TweetService {
 
   public String updateTweets() {
 
-    var query = new Query(TWEET_SEARCH_QUERY);
+    var query = TweetSearchQuery.builder()
+        .date(new Date())
+        .lang(TweetSearchQuery.Language.JAPANESE)
+        .minFaves(MIN_FAVORITES)
+        .build()
+        .generateQuery();
+
     QueryResult result;
 
     try {
