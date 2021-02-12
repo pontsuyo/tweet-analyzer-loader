@@ -1,6 +1,5 @@
 package com.pontsuyo.tweet.analyzer.loader.domain.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public class Tweet {
    */
   public Map<String, AttributeValue> convert2QueryMap() {
     return Map.of(
-        "id", AttributeValue.builder().n(tweetId.toString()).build(),
+        "tweet_id", AttributeValue.builder().n(tweetId.toString()).build(),
         "text", AttributeValue.builder().s(text).build(),
         "user_id", AttributeValue.builder().n(userId.toString()).build(),
         "favorite_count", AttributeValue.builder().n(favoriteCount.toString()).build(),
