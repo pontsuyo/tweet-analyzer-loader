@@ -1,6 +1,7 @@
 package com.pontsuyo.tweet.analyzer.loader.repository;
 
 import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
+import com.pontsuyo.tweet.analyzer.loader.domain.repository.TweetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -8,7 +9,7 @@ import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
 @Slf4j
 @Repository
-public class TweetRepository {
+public class DynamoDBRepository implements TweetRepository {
 
   /**
    * DynamoDBへの書き込み
