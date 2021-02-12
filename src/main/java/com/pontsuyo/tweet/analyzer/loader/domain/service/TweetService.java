@@ -2,7 +2,7 @@ package com.pontsuyo.tweet.analyzer.loader.domain.service;
 
 import com.pontsuyo.tweet.analyzer.loader.domain.model.Tweet;
 import com.pontsuyo.tweet.analyzer.loader.domain.model.TweetSearchQuery;
-import com.pontsuyo.tweet.analyzer.loader.repository.TweetRepository;
+import com.pontsuyo.tweet.analyzer.loader.domain.repository.TweetRepository;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
