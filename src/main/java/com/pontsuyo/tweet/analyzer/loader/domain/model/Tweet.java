@@ -51,7 +51,7 @@ public class Tweet {
   /**
    * DynamoDBのRepositoryに渡すクエリに変換する
    * <p>
-   * AttributeValue.ss()はset（要素順序を保証しない）でしか書き込めないので
+   * AttributeValue.l()は使いにくなったので
    * image_urlsの書き込み時は、シリアライズしてAttributeValue.s()を使用する。
    *
    * @return DynamoDB用書き込みクエリ
