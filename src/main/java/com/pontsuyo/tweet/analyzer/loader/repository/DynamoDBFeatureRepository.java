@@ -16,7 +16,7 @@ public class DynamoDBFeatureRepository implements TweetFeatureRepository {
    */
   public void updateTweetFeature(TweetFeature tweetFeature) {
     var request = PutItemRequest.builder()
-        .tableName("tweet-analyzer")
+        .tableName("tweet-analyzer-feature")
         .item(tweetFeature.convert2QueryMap())
         .build();
 
