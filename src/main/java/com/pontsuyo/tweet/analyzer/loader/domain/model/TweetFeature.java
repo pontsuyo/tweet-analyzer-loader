@@ -14,7 +14,7 @@ import twitter4j.Status;
 
 @Slf4j
 @Builder
-public class Tweet {
+public class TweetFeature {
 
   private final Long tweetId;
 
@@ -22,22 +22,16 @@ public class Tweet {
 
   private final String text;
 
-  private final Integer favoriteCount;
-
-  private final Integer retweetCount;
-
   private final List<String> imageUrls;
 
   // note ComponentクラスでAutowiredしたものを使うにはtoQueryMap()ごと移動する必要あり
   private final ObjectMapper objectMapper = new ObjectMapper();
 
-  public static Tweet fromStatus(Status status) {
-    return Tweet.builder()
+  public static TweetFeature fromStatus(Status status) {
+    return TweetFeature.builder()
         .tweetId(status.getId())
         .userId(status.getUser().getId())
         .text(status.getText())
-        .favoriteCount(status.getFavoriteCount())
-        .retweetCount(status.getRetweetCount())
         .imageUrls(getMediaUrlList(status))
         .build();
   }
@@ -51,8 +45,7 @@ public class Tweet {
   /**
    * DynamoDBのRepositoryに渡すクエリに変換する
    * <p>
-   * AttributeValue.l()は使いにくなったので
-   * image_urlsの書き込み時は、シリアライズしてAttributeValue.s()を使用する。
+   * AttributeValue.l()は使いにくなったので image_urlsの書き込み時は、シリアライズしてAttributeValue.s()を使用する。
    *
    * @return DynamoDB用書き込みクエリ
    */
@@ -61,8 +54,6 @@ public class Tweet {
         "tweet_id", AttributeValue.builder().n(tweetId.toString()).build(),
         "text", AttributeValue.builder().s(text).build(),
         "user_id", AttributeValue.builder().n(userId.toString()).build(),
-        "favorite_count", AttributeValue.builder().n(favoriteCount.toString()).build(),
-        "retweet_count", AttributeValue.builder().n(retweetCount.toString()).build(),
         "image_urls", AttributeValue.builder().s(objectToString(imageUrls)).build()
     );
   }
