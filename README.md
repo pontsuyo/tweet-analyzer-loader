@@ -1,0 +1,4 @@
+# tweet-analyzer-loader
+batch loader for tweet analyzer
+
+![aws-codebuild-master](https://codebuild.ap-northeast-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiMmY3K0FGUXZVYmtGWFQ0ZXJFV2dlNXYrQVo1eXJxaDVUKytaQm0zczcvaXV0bm81Sm45eTUzNS8zd1NoVTlCblFDcnJHazRodjdrbUFZZWRvOUtKdU9JPSIsIml2UGFyYW1ldGVyU3BlYyI6IlpVQmRoRWxwTXF6RXNGQkkiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
