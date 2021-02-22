@@ -22,8 +22,6 @@ public class DynamoDBFeatureRepository implements TweetFeatureRepository {
 
     var client = DynamoDbClient.create();
     client.putItem(request);
-
-    log.info("DBへの書き込みに成功しました。");
   }
 }
 
